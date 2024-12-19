@@ -4,6 +4,7 @@ import { Thread } from "@assistant-ui/react";
 import { makeMarkdownText } from "@assistant-ui/react-markdown";
 
 import SuggestionTool from "./SuggestionTool";
+import { UpsertMemoryTool } from "./UpsertMemoryTool";
 
 const MarkdownText = makeMarkdownText();
 
@@ -23,7 +24,10 @@ export function MyAssistant() {
         ],
       }}
       assistantMessage={{ components: { Text: MarkdownText } }}
-      tools={[SuggestionTool]}
+      userMessage={{
+        allowEdit: true,
+      }}
+      tools={[SuggestionTool, UpsertMemoryTool]}
     />
   );
 }

@@ -39,6 +39,20 @@ export const getThreadState = async (
   return client.threads.getState(threadId);
 };
 
+export const updateState = async (
+  threadId: string,
+  fields: {
+    newState: GraphState;
+    asNode?: string;
+  }
+) => {
+  const client = createClient();
+  return client.threads.updateState(threadId, {
+    values: fields.newState,
+    asNode: fields.asNode!,
+  });
+};
+
 export const sendMessage = async (params: {
   threadId: string;
   messages: LangChainMessage[];
@@ -56,9 +70,14 @@ export const sendMessage = async (params: {
     {
       input: {
         messages: hasHumanMessage ? params.messages : [],
-        userRequest: !hasHumanMessage && params.messages,
+        userRequest: !hasHumanMessage && params.messages[0].content,
       },
-      streamMode: "debug",
+      config: {
+        configurable: {
+          userId: "7777",
+        },
+      },
+      streamMode: "messages",
     }
   );
 };
