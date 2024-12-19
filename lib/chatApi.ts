@@ -1,6 +1,23 @@
 import { Client, ThreadState } from "@langchain/langgraph-sdk";
 import { LangChainMessage } from "@assistant-ui/react-langgraph";
 
+export interface Suggestion {
+  title: string;
+  description: string;
+  location: string;
+  url: string;
+  time: string;
+}
+
+export interface GraphState {
+  messages: LangChainMessage[];
+  userFeedback?: string;
+  suggestions?: Suggestion[];
+  hasEnoughKnowledge: boolean;
+  userRequest: string;
+  feedback?: string;
+}
+
 const createClient = () => {
   const apiUrl =
     process.env["NEXT_PUBLIC_LANGGRAPH_API_URL"] ||
@@ -17,7 +34,7 @@ export const createThread = async () => {
 
 export const getThreadState = async (
   threadId: string
-): Promise<ThreadState<{ messages: LangChainMessage[] }>> => {
+): Promise<ThreadState<GraphState>> => {
   const client = createClient();
   return client.threads.getState(threadId);
 };
@@ -27,14 +44,21 @@ export const sendMessage = async (params: {
   messages: LangChainMessage[];
 }) => {
   const client = createClient();
+  const state = await getThreadState(params.threadId);
+  console.log("State:", state);
+  const hasHumanMessage = state.values?.messages?.find(
+    (message) => message.type === "human"
+  );
+
   return client.runs.stream(
     params.threadId,
     process.env["NEXT_PUBLIC_LANGGRAPH_ASSISTANT_ID"]!,
     {
       input: {
-        messages: params.messages,
+        messages: hasHumanMessage ? params.messages : [],
+        userRequest: !hasHumanMessage && params.messages,
       },
-      streamMode: "messages",
+      streamMode: "debug",
     }
   );
 };
