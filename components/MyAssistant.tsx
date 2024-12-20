@@ -1,8 +1,9 @@
 "use client";
 
+import { MyThread } from "@/components/assistant-ui/thread";
 import { Thread } from "@assistant-ui/react";
 import { makeMarkdownText } from "@assistant-ui/react-markdown";
-
+import { ToolFallback } from "@/components/FallbackTool";
 import SuggestionTool from "./SuggestionTool";
 import { UpsertMemoryTool } from "./UpsertMemoryTool";
 
@@ -14,16 +15,14 @@ export function MyAssistant() {
       welcome={{
         suggestions: [
           {
-            prompt: "Find me a restaurant in the area",
-            text: "Find me a restaurant in the area",
-          },
-          {
-            prompt: "Find me a restaurant in the area",
-            text: "Find me a restaurant in the area",
+            prompt: "Find me a restaurant near me",
           },
         ],
       }}
-      assistantMessage={{ components: { Text: MarkdownText } }}
+      assistantMessage={{
+        components: { Text: MarkdownText, ToolFallback },
+        allowReload: true,
+      }}
       userMessage={{
         allowEdit: true,
       }}
