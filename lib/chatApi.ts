@@ -82,7 +82,7 @@ export async function sendMessage(params: {
         },
         streamMode: "messages",
         command: {
-          resume: "1",
+          resume: params.messages[params.messages.length - 1].content,
         },
       }
     );

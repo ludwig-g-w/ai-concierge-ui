@@ -43,7 +43,7 @@ export function SuggestionItem({
       </CardContent>
       <CardFooter>
         <Button asChild className="w-full">
-          <Link href={url}>View Details</Link>
+          <Link href={url ?? "#"}>View Details</Link>
         </Button>
       </CardFooter>
     </Card>

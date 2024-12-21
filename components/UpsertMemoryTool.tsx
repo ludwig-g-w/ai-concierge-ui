@@ -18,7 +18,6 @@ export const UpsertMemoryTool = makeAssistantToolUI<
         <pre className="whitespace-pre-wrap break-all text-center">
           price_snapshot({JSON.stringify(args)})
         </pre>
-        <p className="text-red-500">{JSON.stringify(result)}</p>
       </div>
     );
   },
