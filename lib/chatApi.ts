@@ -33,6 +33,16 @@ export function createThread() {
   return client.threads.create();
 }
 
+export async function getThreads() {
+  const client = createClient();
+  return client.threads.search();
+}
+
+export async function updateThread(threadId: string) {
+  const client = createClient();
+  return client.threads.get(threadId);
+}
+
 export function getThreadState(
   threadId: string
 ): Promise<ThreadState<GraphState>> {

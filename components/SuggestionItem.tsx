@@ -43,7 +43,9 @@ export function SuggestionItem({
       </CardContent>
       <CardFooter>
         <Button asChild className="w-full">
-          <Link href={url ?? "#"}>View Details</Link>
+          <Link target="_blank" rel="noopener noreferrer" href={url ?? "#"}>
+            View Details
+          </Link>
         </Button>
       </CardFooter>
     </Card>
