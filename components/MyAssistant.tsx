@@ -7,6 +7,7 @@ import { ToolFallback } from "@/components/FallbackTool";
 import SuggestionTool from "./SuggestionTool";
 import { UpsertMemoryTool } from "./UpsertMemoryTool";
 import ExtractTool from "./ExtractTool";
+import GooglePlacesTool from "./GooglePlacesTool";
 
 const MarkdownText = makeMarkdownText();
 
@@ -30,7 +31,7 @@ export function MyAssistant() {
       userMessage={{
         allowEdit: true,
       }}
-      tools={[SuggestionTool, UpsertMemoryTool, ExtractTool]}
+      tools={[SuggestionTool, UpsertMemoryTool, ExtractTool, GooglePlacesTool]}
     />
   );
 }
