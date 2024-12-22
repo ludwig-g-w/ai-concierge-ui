@@ -1,24 +1,11 @@
+import { ExtractSuggestion } from "@/components/ExtractSuggestion";
+import { Suggestion } from "@/types";
 import { makeAssistantToolUI } from "@assistant-ui/react";
-import { SuggestionItem } from "@/components/SuggestionItem";
-
-interface KnowledgeCheck {
-  hasEnoughKnowledge: boolean;
-  reason: string;
-}
-
-interface Suggestion {
-  title: string;
-  description: string;
-  location: string;
-  url: string;
-  time: string;
-}
 
 const ExtractTool = makeAssistantToolUI({
   toolName: "extract",
-  render: ({ args }) => {
-    console.log(args);
-
+  render: ({ args, toolName }) => {
+    console.log({ toolName });
     if ("hasEnoughKnowledge" in args) {
       return (
         <div className="p-4 rounded-lg border">
@@ -41,20 +28,7 @@ const ExtractTool = makeAssistantToolUI({
 
     if ("suggestions" in args) {
       return (
-        <div className="space-y-4">
-          {(args.suggestions as Suggestion[]).map(
-            (suggestion: Suggestion, index: number) => (
-              <SuggestionItem
-                key={index}
-                title={suggestion.title}
-                description={suggestion.description}
-                location={suggestion.location}
-                url={suggestion.url}
-                time={suggestion.time}
-              />
-            )
-          )}
-        </div>
+        <ExtractSuggestion suggestions={args.suggestions as Suggestion[]} />
       );
     }
 

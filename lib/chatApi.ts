@@ -76,8 +76,6 @@ export async function sendMessage(params: {
   );
   const currentThread = await client.threads.get(params.threadId);
   if (currentThread.status === "interrupted") {
-    console.log("Resuming thread");
-
     return client.runs.stream(
       params.threadId,
       process.env["NEXT_PUBLIC_LANGGRAPH_ASSISTANT_ID"]!,

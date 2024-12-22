@@ -1,6 +1,7 @@
 import { MyAssistant } from "@/components/MyAssistant";
 import { ThreadSidebar } from "@/components/ThreadSidebar";
 import { getThreads } from "@/lib/chatApi";
+import { Suspense } from "react";
 
 async function Home() {
   const threads = await getThreads();
