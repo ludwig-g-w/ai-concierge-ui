@@ -50,7 +50,7 @@ export const ExtractSuggestion: React.FC<ExtractSuggestionProps> = ({
             drag={adjustedIndex === 0 ? "x" : false}
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={1}
-            onDragEnd={(e, { offset, velocity }) => {
+            onDragEnd={(_, { offset, velocity }) => {
               const swipe = swipePower(offset.x, velocity.x);
 
               if (swipe < -swipeConfidenceThreshold) {
@@ -60,13 +60,7 @@ export const ExtractSuggestion: React.FC<ExtractSuggestionProps> = ({
               }
             }}
           >
-            <SuggestionItem
-              title={suggestion.title}
-              description={suggestion.description}
-              location={suggestion.location}
-              url={suggestion.url}
-              time={suggestion.time}
-            />
+            <SuggestionItem {...suggestion} />
           </motion.div>
         );
       })}

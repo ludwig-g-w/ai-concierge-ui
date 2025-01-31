@@ -11,6 +11,7 @@ const SuggestionTool = makeAssistantToolUI({
         location={args.location as string}
         url={args.url as string}
         time={args.time as string}
+        reason={args.reason as string}
       />
     );
   },

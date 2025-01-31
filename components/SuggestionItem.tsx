@@ -16,6 +16,7 @@ interface Suggestion {
   location: string;
   url: string;
   time: string;
+  reason: string;
 }
 
 export function SuggestionItem({
@@ -24,6 +25,7 @@ export function SuggestionItem({
   location,
   url,
   time,
+  reason,
 }: Suggestion) {
   return (
     <Card className="w-full max-w-md">
@@ -39,6 +41,10 @@ export function SuggestionItem({
         <div className="mt-2 flex items-center space-x-2 text-sm text-muted-foreground">
           <Clock className="h-4 w-4" />
           <span>{time}</span>
+        </div>
+        <div className="mt-2 flex items-center space-x-2 text-sm text-muted-foreground">
+          <Clock className="h-4 w-4" />
+          <span>{reason}</span>
         </div>
       </CardContent>
       <CardFooter>

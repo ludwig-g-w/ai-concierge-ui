@@ -1,13 +1,12 @@
 "use client";
 
-import { MyThread } from "@/components/assistant-ui/thread";
+import { ToolFallback } from "@/components/FallbackTool";
 import { Thread, UserMessage } from "@assistant-ui/react";
 import { makeMarkdownText } from "@assistant-ui/react-markdown";
-import { ToolFallback } from "@/components/FallbackTool";
-import SuggestionTool from "./SuggestionTool";
-import { UpsertMemoryTool } from "./UpsertMemoryTool";
 import ExtractTool from "./ExtractTool";
 import GooglePlacesTool from "./GooglePlacesTool";
+import SuggestionTool from "./SuggestionTool";
+import { UpsertMemoryTool } from "./UpsertMemoryTool";
 
 const MarkdownText = makeMarkdownText();
 
@@ -18,6 +17,9 @@ export function MyAssistant() {
         suggestions: [
           {
             prompt: "Find me a restaurant near me",
+          },
+          {
+            prompt: "Find me something to do in the city",
           },
         ],
       }}

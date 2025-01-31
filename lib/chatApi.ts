@@ -70,21 +70,17 @@ export async function sendMessage(params: {
 }) {
   const client = createClient();
   const state = await getThreadState(params.threadId);
-  console.log("State:", state);
+
   const hasHumanMessage = state.values?.messages?.find(
     (message) => message.type === "human"
   );
   const currentThread = await client.threads.get(params.threadId);
+  console.log("Current thread:", currentThread.interrupts);
   if (currentThread.status === "interrupted") {
     return client.runs.stream(
       params.threadId,
       process.env["NEXT_PUBLIC_LANGGRAPH_ASSISTANT_ID"]!,
       {
-        config: {
-          configurable: {
-            userId: "7777",
-          },
-        },
         input: {
           messages: params.messages,
         },
@@ -103,11 +99,6 @@ export async function sendMessage(params: {
       input: {
         messages: params.messages,
         userRequest: !hasHumanMessage && params.messages[0].content,
-      },
-      config: {
-        configurable: {
-          userId: "7777",
-        },
       },
       streamMode: "messages",
     }

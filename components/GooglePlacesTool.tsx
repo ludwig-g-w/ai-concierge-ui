@@ -11,8 +11,13 @@ interface GooglePlace {
 const GooglePlacesTool = makeAssistantToolUI({
   toolName: "google_places",
   render: ({ args, result }) => {
-    const places = JSON.parse(result as string) as GooglePlace[];
     const { input } = args as { input: string };
+    let places: GooglePlace[] = [];
+    try {
+      places = JSON.parse(result as string) as GooglePlace[];
+    } catch (error) {
+      places = [];
+    }
 
     return (
       <div className="space-y-6">

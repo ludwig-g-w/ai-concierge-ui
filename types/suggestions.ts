@@ -4,4 +4,5 @@ export interface Suggestion {
   location: string;
   url: string;
   time: string;
+  reason: string;
 }
