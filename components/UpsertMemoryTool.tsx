@@ -14,9 +14,12 @@ export const UpsertMemoryTool = makeAssistantToolUI<
   toolName: "upsertMemory",
   render: ({ args, result }) => {
     return (
-      <div className="mb-4 flex flex-col items-center gap-2">
+      <div className="mb-4 flex flex-col items-center gap-2 mt-4">
         <pre className="whitespace-pre-wrap break-all text-center">
-          price_snapshot({JSON.stringify(args)})
+          args: {JSON.stringify(args)}
+        </pre>
+        <pre className="whitespace-pre-wrap break-all text-center">
+          result: {JSON.stringify(result)}
         </pre>
       </div>
     );

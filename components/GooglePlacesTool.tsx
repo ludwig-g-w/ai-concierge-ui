@@ -20,7 +20,7 @@ const GooglePlacesTool = makeAssistantToolUI({
     }
 
     return (
-      <div className="space-y-6">
+      <div className="space-y-6 mt-4">
         <div className="bg-gray-50 p-4 rounded-lg">
           <p className="text-sm text-gray-600">
             Found {places.length} place{places.length !== 1 ? "s" : ""} for
