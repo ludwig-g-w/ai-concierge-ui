@@ -1,10 +1,10 @@
 "use client";
 
 import { useAssistantRuntime } from "@assistant-ui/react";
-import { useLangGraphMessages } from "@assistant-ui/react-langgraph";
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { UserMenu } from "./UserMenu";
 export function ThreadSidebar({
   threads,
 }: {
@@ -12,7 +12,6 @@ export function ThreadSidebar({
 }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const runtime = useAssistantRuntime();
-  console.log(runtime.thread.getState().messages);
   const router = useRouter();
 
   return (
@@ -25,7 +24,7 @@ export function ThreadSidebar({
         {!isCollapsed && (
           <button
             onClick={async () => {
-              runtime.switchToNewThread();
+              runtime.threads.switchToNewThread();
               router.refresh();
             }}
             className="flex items-center gap-2 px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 rounded"
@@ -63,6 +62,7 @@ export function ThreadSidebar({
           ))}
         </ul>
       </div>
+      <UserMenu />
     </div>
   );
 }
