@@ -75,7 +75,7 @@ export async function sendMessage(params: {
     (message) => message.type === "human"
   );
   const currentThread = await client.threads.get(params.threadId);
-  console.log("Current thread:", currentThread.interrupts);
+  
   if (currentThread.status === "interrupted") {
     return client.runs.stream(
       params.threadId,

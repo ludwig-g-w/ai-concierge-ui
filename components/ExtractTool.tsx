@@ -5,7 +5,7 @@ import { makeAssistantToolUI } from "@assistant-ui/react";
 const ExtractTool = makeAssistantToolUI({
   toolName: "extract",
   render: ({ args, toolName }) => {
-    console.log({ toolName });
+
     if ("hasEnoughKnowledge" in args) {
       return (
         <div className="p-4 rounded-lg border">
@@ -28,7 +28,7 @@ const ExtractTool = makeAssistantToolUI({
 
     if ("suggestions" in args) {
       return (
-        <ExtractSuggestion suggestions={args.suggestions as Suggestion[]} />
+        <ExtractSuggestion suggestions={args.suggestions as unknown as Suggestion[]} />
       );
     }
 

@@ -1,32 +1,50 @@
 "use client";
 
 import {
+  ActionBarPrimitive,
   ComposerPrimitive,
   MessagePrimitive,
   ThreadPrimitive,
-  useMessage,
-  ActionBarPrimitive,
+  useThread,
+  useThreadList,
 } from "@assistant-ui/react";
-import type { FC } from "react";
 import { SendHorizontalIcon } from "lucide-react";
+import type { FC } from "react";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
+import ExtractTool from "@/components/ExtractTool";
+import FallbackTool from "@/components/FallbackTool";
+import GooglePlacesTool from "@/components/GooglePlacesTool";
+import SuggestionTool from "@/components/SuggestionTool";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { UpsertMemoryTool } from "../UpsertMemoryTool";
 
 export const MyThread: FC = () => {
+  const thread = useThreadList((t) => t.threads);
+
+  console.log({ thread });
+
+  // if (!thread[thread.length - 1].isUser) {
+  // }
+
   return (
     <ThreadPrimitive.Root className="bg-background h-full">
-      <ThreadPrimitive.Viewport className="flex h-full flex-col items-center overflow-y-scroll scroll-smooth bg-inherit px-4 pt-8">
+      <ThreadPrimitive.Viewport className="flex h-full flex-col items-center overflow-y-scroll scroll-smooth bg-inherit px-4 pt-8 gap-2">
         <MyThreadWelcome />
 
         <ThreadPrimitive.Messages
           components={{
-            SystemMessage: MySystemMessage,
-            Message: MyUserMessage,
             UserMessage: MyUserMessage,
             AssistantMessage: MyAssistantMessage,
           }}
         />
+
+        <ExtractTool />
+        <FallbackTool />
+        <GooglePlacesTool />
+        <SuggestionTool />
+        <UpsertMemoryTool />
+
         <div className="min-h-8 flex-grow" />
 
         <div className="sticky bottom-0 mt-3 flex w-full max-w-2xl flex-col items-center justify-end rounded-t-lg bg-inherit pb-4">
@@ -73,8 +91,6 @@ const MyComposer: FC = () => {
 };
 
 const MyUserMessage: FC = () => {
-  const msg = useMessage();
-  console.log(msg);
   return (
     <MessagePrimitive.Root className="grid w-full max-w-2xl auto-rows-auto grid-cols-[minmax(72px,1fr)_auto] gap-y-2 py-4">
       <Avatar className="col-start-1 row-span-full row-start-1 mr-4">

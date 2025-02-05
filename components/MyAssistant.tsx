@@ -1,7 +1,7 @@
 "use client";
 
-import { ToolFallback } from "@/components/FallbackTool";
-import { Thread, UserMessage } from "@assistant-ui/react";
+import toolFallback  from "@/components/FallbackTool";
+import { Thread, useMessage, UserMessage, useThread } from "@assistant-ui/react";
 import { makeMarkdownText } from "@assistant-ui/react-markdown";
 import ExtractTool from "./ExtractTool";
 import GooglePlacesTool from "./GooglePlacesTool";
@@ -27,7 +27,7 @@ export function MyAssistant() {
         UserMessage: UserMessage,
       }}
       assistantMessage={{
-        components: { Text: MarkdownText, ToolFallback },
+        components: { Text: MarkdownText, ToolFallback: toolFallback },
         allowReload: true,
       }}
       userMessage={{
